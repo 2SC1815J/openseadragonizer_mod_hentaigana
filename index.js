@@ -209,6 +209,14 @@
                     returnPixelCoordinates: false,
                     //restrictToImage: true, //will have trouble at the bottom of portrait images
                     onSelection: function(rect) {
+                        viewer.removeOverlay("runtime-overlay-selection");
+                        var elt = document.createElement("div");
+                        elt.id = "runtime-overlay-selection";
+                        elt.className = "highlightpre";
+                        viewer.addOverlay({
+                            element: elt,
+                            location: new OpenSeadragon.Rect(rect.x, rect.y, rect.width, rect.height)
+                        });
                         var rect_ = viewer.viewport.viewportToViewerElementRectangle(rect);
                         var canvasClip = document.createElement("canvas");
                         var canvasClipCtx = canvasClip.getContext("2d");
