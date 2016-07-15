@@ -17,7 +17,7 @@
 
 入力後に表示される次のURLをTwitter等で利用すれば、閲覧した方は[OpenSeadragon]の機能を用いて拡大縮小やページ移動することができます。
 
-- http://2sc1815j.github.io/openseadragonizer_mod_hentaigana/?img=http://archive.wul.waseda.ac.jp/kosho/he12/he12_04353/he12_04353_p0001.jpg&pages=121
+- http://2sc1815j.github.io/openseadragonizer_mod/?img=http://archive.wul.waseda.ac.jp/kosho/he12/he12_04353/he12_04353_p0001.jpg&pages=121
 
 [OpenSeadragon]: https://openseadragon.github.io/
 
