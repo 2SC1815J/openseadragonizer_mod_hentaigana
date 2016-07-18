@@ -29,7 +29,7 @@
 
 [変体仮名の画像認識システム]: https://hentaigana.herokuapp.com/
 
-- 古活字版（嵯峨本）『[伊勢物語　上]( http://www.digital.archives.go.jp/das/meta/M2012102621183556258)』（国立公文書館所蔵）を表示し、変体仮名の画像認識システムを有効にする例
+- 古活字版（嵯峨本）『[伊勢物語　上](http://www.digital.archives.go.jp/das/meta/M2012102621183556258)』（国立公文書館所蔵）を表示し、変体仮名の画像認識システムを有効にする例
  - https://2sc1815j.github.io/openseadragonizer_mod_hentaigana/?img=https://2sc1815j.github.io/openseadragonizer_mod_hentaigana/sample_image/M2012102621183556258_M2012102621183556258_0004.jpg&pages=10
 
 ### キーボードショートカット (keyboard shortcuts)

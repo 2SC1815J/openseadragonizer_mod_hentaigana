@@ -218,13 +218,14 @@
                             location: new OpenSeadragon.Rect(rect.x, rect.y, rect.width, rect.height)
                         });
                         var rect_ = viewer.viewport.viewportToViewerElementRectangle(rect);
-                        var canvasClip = document.createElement("canvas");
-                        var canvasClipCtx = canvasClip.getContext("2d");
-                        canvasClip.width = rect_.width;
-                        canvasClip.height = rect_.height;
-                        canvasClipCtx.drawImage( viewer.drawer.canvas, rect_.x, rect_.y, rect_.width, rect_.height, 0, 0, rect_.width, rect_.height);
-                        
-                        // taken from https://en.wikipedia.org/wiki/Otsu's_method
+                        var cnv = document.createElement("canvas");
+                        var ctx = cnv.getContext("2d");
+                        cnv.width = rect_.width;
+                        cnv.height = rect_.height;
+                        ctx.drawImage(viewer.drawer.canvas, rect_.x, rect_.y, rect_.width, rect_.height, 0, 0, rect_.width, rect_.height);
+                        // ---------------------------------------------------------------------------------------------
+                        // This part uses code from the Wikipedia article "https://en.wikipedia.org/wiki/Otsu's_method",
+                        // which is released under the Creative Commons Attribution-Share-Alike License 3.0.
                         function otsu(histogram, pixelsNumber) {
                             var sum = 0, sumB = 0, wB = 0, wF = 0, mB, mF, max = 0, between, threshold = 0;
                             for (var i = 0; i < 256; ++i) {
@@ -247,7 +248,7 @@
                             }
                             return threshold;
                         }
-                        var imData = canvasClipCtx.getImageData(0, 0, canvasClip.width, canvasClip.height)
+                        var imData = ctx.getImageData(0, 0, cnv.width, cnv.height)
                         var histogram = Array(256), red, green, blue, gray;
                         for (i = 0; i < 256; ++i) {
                             histogram[i] = 0;
@@ -256,20 +257,22 @@
                             red = imData.data[i];
                             blue = imData.data[i + 1];
                             green = imData.data[i + 2];
+                            // alpha = imData.data[i + 3];
                             // https://en.wikipedia.org/wiki/Grayscale
                             gray = red * .2126 + green * .7152 + blue * .0722;
                             histogram[Math.round(gray)] += 1;
                         }
                         var threshold = otsu(histogram, imData.data.length / 4);
-                        console.log("threshold = %s", threshold);
+                        // console.log("threshold = %s", threshold);
                         for (i = 0; i < imData.data.length; i += 4) {
                             imData.data[i] = imData.data[i + 1] = imData.data[i + 2] = imData.data[i] >= threshold ? 255 : 0;
                             imData.data[i + 3] = 255; // opacity 255 = 100%
                         }
-                        canvasClipCtx.putImageData(imData, 0, 0);
-                        
+                        ctx.putImageData(imData, 0, 0);
+                        // ---------------------------------------------------------------------------------------------
+                        // taken from https://github.com/letsspeak/trimming_upload.js
                         var type = 'image/png';
-                        var dataurl = canvasClip.toDataURL(type);
+                        var dataurl = cnv.toDataURL(type);
                         var bin = atob(dataurl.split(',')[1]);
                         var buffer = new Uint8Array(bin.length);
                         for (var i = 0; i < bin.length; i++) {
