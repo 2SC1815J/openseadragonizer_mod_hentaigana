@@ -280,7 +280,7 @@
                         }
                         var blob = new Blob([buffer.buffer], {type: type});
                         var fd = new FormData();
-                        fd.append('upload', blob, "test.jpg");
+                        fd.append('upload', blob, "image.png");
                         $("#input_dialog").html('<div><img src="'+ dataurl + '"><img src="loading.gif"></div>');
                         $.ajax({
                             type: 'POST',
