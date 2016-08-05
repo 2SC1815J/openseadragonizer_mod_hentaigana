@@ -229,6 +229,9 @@
                         function otsu(histogram, pixelsNumber) {
                             var sum = 0, sumB = 0, wB = 0, wF = 0, mB, mF, max = 0, between, threshold = 0;
                             for (var i = 0; i < 256; ++i) {
+                                sum += i * histogram[i];
+                            }
+                            for (var i = 0; i < 256; ++i) {
                                 wB += histogram[i];
                                 if (wB == 0) {
                                     continue;
