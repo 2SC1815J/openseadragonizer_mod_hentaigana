@@ -204,7 +204,7 @@
         });
         if ("selection" in viewer) {
             // https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image
-            if (a.protocol == location.protocol && a.host == location.host && a.port == location.port) {
+            if (a.protocol === location.protocol && a.host === location.host && a.port === location.port) {
                 var selection = viewer.selection({
                     returnPixelCoordinates: false,
                     //restrictToImage: true, //will have trouble at the bottom of portrait images
@@ -227,17 +227,17 @@
                         // This part uses code from the Wikipedia article "https://en.wikipedia.org/wiki/Otsu's_method",
                         // which is released under the Creative Commons Attribution-Share-Alike License 3.0.
                         function otsu(histogram, pixelsNumber) {
-                            var sum = 0, sumB = 0, wB = 0, wF = 0, mB, mF, max = 0, between, threshold = 0;
-                            for (var i = 0; i < 256; ++i) {
+                            var i, sum = 0, sumB = 0, wB = 0, wF = 0, mB, mF, max = 0, between, threshold = 0;
+                            for (i = 0; i < 256; ++i) {
                                 sum += i * histogram[i];
                             }
-                            for (var i = 0; i < 256; ++i) {
+                            for (i = 0; i < 256; ++i) {
                                 wB += histogram[i];
-                                if (wB == 0) {
+                                if (wB === 0) {
                                     continue;
                                 }
                                 wF = pixelsNumber - wB;
-                                if (wF == 0) {
+                                if (wF === 0) {
                                     break;
                                 }
                                 sumB += i * histogram[i];
@@ -251,7 +251,7 @@
                             }
                             return threshold;
                         }
-                        var imData = ctx.getImageData(0, 0, cnv.width, cnv.height)
+                        var imData = ctx.getImageData(0, 0, cnv.width, cnv.height);
                         var histogram = Array(256), red, green, blue, gray;
                         for (i = 0; i < 256; ++i) {
                             histogram[i] = 0;
@@ -262,7 +262,7 @@
                             green = imData.data[i + 2];
                             // alpha = imData.data[i + 3];
                             // https://en.wikipedia.org/wiki/Grayscale
-                            gray = red * .2126 + green * .7152 + blue * .0722;
+                            gray = red * 0.2126 + green * 0.7152 + blue * 0.0722;
                             histogram[Math.round(gray)] += 1;
                         }
                         var threshold = otsu(histogram, imData.data.length / 4);
@@ -278,7 +278,7 @@
                         var dataurl = cnv.toDataURL(type);
                         var bin = atob(dataurl.split(',')[1]);
                         var buffer = new Uint8Array(bin.length);
-                        for (var i = 0; i < bin.length; i++) {
+                        for (i = 0; i < bin.length; i++) {
                             buffer[i] = bin.charCodeAt(i);
                         }
                         var blob = new Blob([buffer.buffer], {type: type});
