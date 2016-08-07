@@ -217,7 +217,7 @@
                             element: elt,
                             location: new OpenSeadragon.Rect(rect.x, rect.y, rect.width, rect.height)
                         });
-                        var rect_ = viewer.viewport.viewportToViewerElementRectangle(rect);
+                        var rect_ = viewer.viewport.viewportToViewerElementRectangle(rect).times(OpenSeadragon.pixelDensityRatio);
                         var cnv = document.createElement("canvas");
                         var ctx = cnv.getContext("2d");
                         cnv.width = rect_.width;
