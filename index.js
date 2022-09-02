@@ -287,7 +287,7 @@
                         $("#input_dialog").html('<div><img src="'+ dataurl + '"><img src="loading.gif"></div>');
                         $.ajax({
                             type: 'POST',
-                            url: 'https://hentaigana.herokuapp.com/json',
+                            url: 'https://hentaigana.2sc1815j.net/api',
                             data: fd,
                             processData: false,
                             contentType: false
@@ -307,7 +307,7 @@
                                             data.predictions[i].prob + '</td></tr>';
                                     }
                                     contents += '</table>';
-                                    contents += '<p style="font-size: smaller;">Provided by <a href="https://hentaigana.herokuapp.com/" target="_blank">https://hentaigana.herokuapp.com/</a></p>';
+                                    contents += '<p style="font-size: smaller;">Provided by <a href="https://hentaigana.2sc1815j.net/" target="_blank">https://hentaigana.2sc1815j.net/</a></p>';
                                     dialogObj.append(contents);
                                 }
                             }
